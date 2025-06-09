@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token
+from flask import Blueprint, request, jsonify, make_response
+from flask_jwt_extended import create_access_token, set_access_cookies, unset_jwt_cookies
 from marshmallow import ValidationError
 from datetime import timedelta
 from app.extensions import mongo, bcrypt
@@ -46,4 +46,15 @@ def login():
         return jsonify({'error': 'Invalid credentials'}), 401
     
     token = create_access_token(identity=str(user['_id']), expires_delta=timedelta(days=1))
-    return jsonify({'message': 'User logged in', 'access_token': token}), 200
+
+    response = make_response(jsonify({'message': 'User logged in'}))
+    set_access_cookies(response, token)
+
+    return response
+
+@auth.route('/logout', methods=['POST'])
+def logout():
+    response = jsonify({'message': 'User logged out'})
+    unset_jwt_cookies(response)
+
+    return response

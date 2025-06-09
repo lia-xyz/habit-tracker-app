@@ -3,7 +3,8 @@
 A simple API that allows users to track their habits and log their progress.
 
 ## Features ✨
-- JWT-based authentication
+- JWT-based authentication with cookie support
+- Login and logout functionality
 - Create, update, delete, and view habits
 - Log habit completion by date
 - Retrieve logs for specific habits
@@ -17,34 +18,34 @@ A simple API that allows users to track their habits and log their progress.
 ## API Endpoints
 
 ### Auth
-- `POST /auth/register` – Register a new user
-- `POST /auth/login` – Login and receive a JWT token
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - Login and receive a JWT token (stored in cookies)
+- `POST /auth/logout` - Logout and clear JWT cookie
 
 ### Habits
-- `GET /habits` – Get all habits
-- `POST /habits` – Create new habit
-- `PUT /habits/<habit_id>` – Update habit
-- `DELETE /habits/<habit_id>` – Delete habit
+- `GET /habits` - Get all habits
+- `POST /habits` - Create new habit
+- `PUT /habits/<habit_id>` - Update habit
+- `DELETE /habits/<habit_id>` - Delete habit
 
 ### Logs
-- `GET /habits/<habit_id>/logs` – Get logs for a habit
-- `POST /habits/<habit_id>/logs` – Log a habit for a date
-- `DELETE /logs/<log_id>` – Delete log
+- `GET /habits/<habit_id>/logs` - Get logs for a habit
+- `POST /habits/<habit_id>/logs` - Log a habit for a date
+- `DELETE /logs/<log_id>` - Delete log
 
 ## How to Run 🚀
 1. Clone this repository: `git clone https://github.com/lia-xyz/habit-tracker-app.git`
-2. Create virtual environment: `python -m venv venv`
-```
-On Mac: source venv/bin/activate
-On Windows: venv\Scripts\activate
-```
-3. Install dependencies: `pip install -r requirements.txt`
-4. Setup environment variables. Create a `.env` file and add the following:
+2. Create a virtual environment: `python -m venv venv`
+3. Activate the virtual environment:  
+On macOS and Linux: `source venv/bin/activate`  
+On Windows: `venv\Scripts\activate`  
+4. Install dependencies: `pip install -r requirements.txt`
+5. Set up environment variables. Create a `.env` file and add the following:
 ```
 MONGO_URI=your_database_url
 JWT_SECRET_KEY=your_jwt_key
 ```
-5. Run the app: `python run.py`
+6. Run the app: `python run.py`
 
 ## Contributing 🤝
 
